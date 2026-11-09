@@ -6,7 +6,7 @@
 /*   By: basianno <basianno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 15:58:16 by basianno          #+#    #+#             */
-/*   Updated: 2026/11/06 13:41:09 by basianno         ###   ########.fr       */
+/*   Updated: 2026/11/09 14:51:02 by basianno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,46 @@ int	check_char(char c, va_list *args)
 		return (ft_putchar(va_arg(*args, int)));
 	if (c == 's')
 		return (ft_putstr(va_arg(*args, char *)));
+	if (c == 'i' || c == 'd')
+		return (ft_putnbr(va_arg(*args, int)));
+	if (c == '%')
+		return (ft_putchar('%'));
 	if (c == 'x')
-		return (ft_putstr(va_arg(*args, unsigned int)));
-
-	return 0;
+		return (ft_base(va_arg(*args, unsigned int), "0123456789abcdef"));
+	if (c == 'X')
+		return (ft_base(va_arg(*args, unsigned int), "0123456789ABCDEF"));
+	if (c == 'u')
+		return (ft_base(va_arg(*args, unsigned int), "0123456789"));
+	if (c == 'p')
+		return (ft_hex(va_arg(*args, void *)));
+	return (ft_putchar('%') + ft_putchar(c));
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	int	i;
-	va_list args;
+	va_list	args;
+	int		i;
+	int		count;
 
 	va_start(args, format);
 	i = 0;
+	count = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			check_char(format[i + 1], &args);
+			if (format[i + 1] == '\0')
+				return (va_end(args), -1);
+			count += check_char(format[i + 1], &args);
 			i++;
 		}
 		else
+		{
 			write(1, &format[i], 1);
+			count++;
+		}
 		i++;
 	}
 	va_end(args);
-	return (i);
+	return (count);
 }
