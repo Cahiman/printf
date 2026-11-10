@@ -6,7 +6,7 @@
 /*   By: basianno <basianno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 15:58:16 by basianno          #+#    #+#             */
-/*   Updated: 2026/11/09 14:51:02 by basianno         ###   ########.fr       */
+/*   Updated: 2026/11/10 09:43:44 by basianno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	ft_printf(const char *format, ...)
 	int		i;
 	int		count;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	i = 0;
 	count = 0;
@@ -52,10 +54,7 @@ int	ft_printf(const char *format, ...)
 			i++;
 		}
 		else
-		{
-			write(1, &format[i], 1);
-			count++;
-		}
+			count += write(1, &format[i], 1);
 		i++;
 	}
 	va_end(args);

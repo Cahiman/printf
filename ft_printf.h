@@ -6,7 +6,7 @@
 /*   By: basianno <basianno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/09 09:57:11 by basianno          #+#    #+#             */
-/*   Updated: 2026/11/09 14:21:45 by basianno         ###   ########.fr       */
+/*   Updated: 2026/11/10 09:00:37 by basianno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	ft_putchar(char c);
 int	ft_putstr(char *str);
 int	ft_putnbr(int n);
 int	ft_base(unsigned long n, char *str);
+int	ft_hex(void *ptr);
 
 #endif

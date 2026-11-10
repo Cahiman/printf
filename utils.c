@@ -6,7 +6,7 @@
 /*   By: basianno <basianno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/06 13:01:58 by basianno          #+#    #+#             */
-/*   Updated: 2026/11/09 14:44:56 by basianno         ###   ########.fr       */
+/*   Updated: 2026/11/10 09:04:56 by basianno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,12 @@ int	ft_base(unsigned long n, char *str)
 
 int	ft_hex(void *ptr)
 {
-	
+	int	count;
+
+	count = 0;
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	count += ft_putstr("0x");
+	count += ft_base((unsigned long)ptr, "0123456789abcdef");
+	return (count);
 }
